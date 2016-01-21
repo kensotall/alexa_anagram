@@ -1,0 +1,10 @@
+{
+  "intents": [
+    {
+      "intent": "AnagramIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    }
+  ]
+}
