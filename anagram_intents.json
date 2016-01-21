@@ -1,12 +1,14 @@
 {
   "intents": [
     {
-      "intent": "AnagramIntent"
+      "intent": "AnagramIntent",
       "slots": [
         {
           "name": "input",
           "type": "string"
-        },
+        }
+      ]
+    },
     {
       "intent": "AMAZON.HelpIntent"
     }
