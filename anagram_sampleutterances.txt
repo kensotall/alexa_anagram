@@ -1,1 +1,1 @@
-AnagramIntent anagram m a r g a n a
+AnagramIntent anagram {input}

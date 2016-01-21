@@ -1,20 +1,12 @@
 """
 Ken Sanderson
-1/18/2016
-- My first shot at an Alexa Skill
+1/20/2016
 
-Inspire -- Provide daily inspiration to lift everyone up.
+Anagram Alexa Skill -- try to find anagrams for provided letters
 
 """
 
 from __future__ import print_function
-from random import randint
-
-inspiration = [
-        "Isn't Alyssa the best wife ever?",
-        'Wow, Stevie is just so furry!',
-        'Knowing is not enough, we must apply. Willing is not enough, we must do.'
-        ]
 
 def lambda_handler(event, context):
     """ Route the incoming request based on type (LaunchRequest, IntentRequest,
@@ -72,7 +64,7 @@ def on_intent(intent_request, session):
 
     # Dispatch to your skill's intent handlers
     if intent_name == "InspireMeIntent":
-        return get_inspiration()
+        return get_anagram()
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
     else:
@@ -89,12 +81,13 @@ def on_session_ended(session_ended_request, session):
     # add cleanup logic here
 
 # --------------- Functions that control the skill's behavior ------------------
-
-def get_inspiration():
+#perms = [''.join(i) for i in list(itertools.permutations('cat'))]
+def get_anagram(intent, session):
     session_attributes = {}
-    card_title = 'Inspire - by Ken'
-    rand_index = randint(0, len(inspiration)-1)
-    speech_output = inspiration[rand_index] 
+    letters = intent['slots']['input']
+    card_title = 'Anagram - by Ken' + '  ' + letters
+    l = len(letters)
+    speech_output = "You're input was {} letters long".format(l)
     reprompt_text = ""
     should_end_session = True
     return build_response(session_attributes, build_speechlet_response(
@@ -107,12 +100,10 @@ def get_welcome_response():
     add those here
     """
     session_attributes = {}
-    card_title = 'Inspire - by Ken'
-    rand_index = randint(0, len(inspiration)-1)
-    speech_output = "Welcome to Ken's Inspire App. " \
-                    "Here is today's inspiration. " + inspiration[rand_index]
-    reprompt_text = ""
-    should_end_session = True
+    card_title = 'Anagram- by Ken'
+    speech_output = "Welcome to Ken's Anagram App."
+    reprompt_text = "Please spell out a word for me to anagram. "
+    should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
