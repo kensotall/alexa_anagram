@@ -99,6 +99,7 @@ def get_welcome_response():
     """ If we wanted to initialize the session to have some attributes we could
     add those here
     """
+    word_set = set(open('word_file','r').read().split('\n'))
     session_attributes = {}
     card_title = 'Anagram- by Ken'
     speech_output = "Welcome to Ken's Anagram App."
