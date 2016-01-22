@@ -4,10 +4,46 @@
       "intent": "AnagramIntent",
       "slots": [
         {
-          "name": "input",
-          "type": "string"
+          "name": "CZero",
+          "type": "LIST_OF_LETTERS"
+        },
+        {
+          "name": "COne",
+          "type": "LIST_OF_LETTERS"
+        },
+        {
+          "name": "CTwo",
+          "type": "LIST_OF_LETTERS"
+        },
+        {
+          "name": "CThree",
+          "type": "LIST_OF_LETTERS"
+        },
+        {
+          "name": "CFour",
+          "type": "LIST_OF_LETTERS"
+        },
+        {
+          "name": "CFive",
+          "type": "LIST_OF_LETTERS"
+        },
+        {
+          "name": "CSix",
+          "type": "LIST_OF_LETTERS"
+        },
+        {
+          "name": "CSeven",
+          "type": "LIST_OF_LETTERS"
+        },
+        {
+          "name": "CEight",
+          "type": "LIST_OF_LETTERS"
+        },
+        {
+          "name": "CNine",
+          "type": "LIST_OF_LETTERS"
         }
-      ]
+        ]
     },
     {
       "intent": "AMAZON.HelpIntent"

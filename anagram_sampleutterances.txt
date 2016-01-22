@@ -1,1 +1,9 @@
-AnagramIntent anagram {input}
+AnagramIntent anagram {CZero} {COne}
+AnagramIntent anagram {CZero} {COne} {CTwo}
+AnagramIntent anagram {CZero} {COne} {CTwo} {CThree}
+AnagramIntent anagram {CZero} {COne} {CTwo} {CThree} {CFour}
+AnagramIntent anagram {CZero} {COne} {CTwo} {CThree} {CFour} {CFive}
+AnagramIntent anagram {CZero} {COne} {CTwo} {CThree} {CFour} {CFive} {CSix}
+AnagramIntent anagram {CZero} {COne} {CTwo} {CThree} {CFour} {CFive} {CSix} {CSeven}
+AnagramIntent anagram {CZero} {COne} {CTwo} {CThree} {CFour} {CFive} {CSix} {CSeven} {CEight}
+AnagramIntent anagram {CZero} {COne} {CTwo} {CThree} {CFour} {CFive} {CSix} {CSeven} {CEight} {CNine}
