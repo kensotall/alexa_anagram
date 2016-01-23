@@ -6,16 +6,15 @@ Anagram Alexa Skill -- try to find anagrams for provided letters
 
 """
 
-from __future__ import print_function
-import string
-#from word_file import word_set
+#from __future__ import print_function
+#import string
 
 def lambda_handler(event, context):
     """ Route the incoming request based on type (LaunchRequest, IntentRequest,
     etc.) The JSON body of the request is provided in the event parameter.
     """
-    print("event.session.application.applicationId=" +
-          event['session']['application']['applicationId'])
+    print "event.session.application.applicationId=" +
+          event['session']['application']['applicationId']
 
     """
     Skill's application ID to prevent someone else from configuring a skill that 
@@ -40,8 +39,8 @@ def lambda_handler(event, context):
 def on_session_started(session_started_request, session):
     """ Called when the session starts """
 
-    print("on_session_started requestId=" + session_started_request['requestId']
-          + ", sessionId=" + session['sessionId'])
+    print "on_session_started requestId=" + session_started_request['requestId']
+          + ", sessionId=" + session['sessionId']
 
 
 def on_launch(launch_request, session):
@@ -49,8 +48,8 @@ def on_launch(launch_request, session):
     want
     """
 
-    print("on_launch requestId=" + launch_request['requestId'] +
-          ", sessionId=" + session['sessionId'])
+    print "on_launch requestId=" + launch_request['requestId'] +
+          ", sessionId=" + session['sessionId']
     # Dispatch to your skill's launch
     return get_welcome_response()
 
@@ -58,8 +57,8 @@ def on_launch(launch_request, session):
 def on_intent(intent_request, session):
     """ Called when the user specifies an intent for this skill """
 
-    print("on_intent requestId=" + intent_request['requestId'] +
-          ", sessionId=" + session['sessionId'])
+    print "on_intent requestId=" + intent_request['requestId'] +
+          ", sessionId=" + session['sessionId']
 
     intent = intent_request['intent']
     intent_name = intent_request['intent']['name']
@@ -78,23 +77,23 @@ def on_session_ended(session_ended_request, session):
 
     Is not called when the skill returns should_end_session=true
     """
-    print("on_session_ended requestId=" + session_ended_request['requestId'] +
-          ", sessionId=" + session['sessionId'])
+    print "on_session_ended requestId=" + session_ended_request['requestId'] +
+          ", sessionId=" + session['sessionId']
     # add cleanup logic here
 
 # --------------- Functions that control the skill's behavior ------------------
 def get_anagram(intent, session):
     session_attributes = {}
+    card_title = "Anagram - by Ken"
     word = ''
     slot_names = ['CZero','COne','CTwo','CThree','CFour','CFive','CSix','CSeven','CEight','CNine']
     for i in xrange(10):
         if 'value' in intent['slots'][slot_names[i]]:
             word += intent['slots'][slot_names[i]]['value']
-    word = string.lower(word)
+    #word = string.lower(word)
     perms = [''.join(i) for i in list(itertools.permutations(word))]
     real_words = perms.intersection(word_set)
-    card_title = "Anagram - by Ken"
-    speech_output = "{} anagrams to {} words".format(word, real_words)
+    speech_output = "Success! I've found {} anagrams: {}".format(len(real_words), ', '.join(real_words))
     reprompt_text = ""
     should_end_session = True
     return build_response(session_attributes, build_speechlet_response(
