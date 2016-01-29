@@ -71905,13 +71905,14 @@ def get_anagram(intent, session):
         if 'value' in intent['slots'][slot_names[i]]:
             user_input = intent['slots'][slot_names[i]]['value']
             user_input = string.lower(user_input)
+            user_input = user_input.replace('.','')
             if (len(user_input) == 1) and (alphabet.find(user_input) != -1):
                 word += intent['slots'][slot_names[i]]['value']
             else:
                 speech_output = "Sorry, I didn't get that. " \
                                 "Please say anagram and then spell out a 2-10 letter word for me."
                 reprompt_text = "Please say anagram and then spell out a 2-10 letter word for me."
-                should_end_session = True
+                should_end_session = False
                 return build_response(session_attributes, build_speechlet_response(
                     'error: '+user_input, speech_output, reprompt_text, should_end_session))
     perms = set([''.join(i) for i in list(itertools.permutations(word))])
