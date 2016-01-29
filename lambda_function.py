@@ -71916,8 +71916,10 @@ def get_anagram(intent, session):
                     'error: '+user_input, speech_output, reprompt_text, should_end_session))
     perms = set([''.join(i) for i in list(itertools.permutations(word))])
     real_words = perms.intersection(word_set)
-    if len(real_words) != 0:
+    if len(real_words) > 1:
         speech_output = "Success! I've found {} anagrams: {}".format(len(real_words), ', '.join(real_words))
+    elif len(real_words) == 1:
+        speech_output = "Success! I've found {} anagram: {}".format(len(real_words), ', '.join(real_words))
     else:
         speech_output = "Sorry, I didn't find any anagrams"
     reprompt_text = ""
