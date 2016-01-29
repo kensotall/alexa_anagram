@@ -71914,7 +71914,7 @@ def get_anagram(intent, session):
                 should_end_session = True
                 return build_response(session_attributes, build_speechlet_response(
                     'error: '+user_input, speech_output, reprompt_text, should_end_session))
-    perms = [''.join(i) for i in list(itertools.permutations(word))]
+    perms = set([''.join(i) for i in list(itertools.permutations(word))])
     real_words = perms.intersection(word_set)
     if len(real_words) != 0:
         speech_output = "Success! I've found {} anagrams: {}".format(len(real_words), ', '.join(real_words))
