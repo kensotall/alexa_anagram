@@ -71907,7 +71907,7 @@ def get_anagram(intent, session):
             user_input = string.lower(user_input)
             user_input = user_input.replace('.','')
             if (len(user_input) == 1) and (alphabet.find(user_input) != -1):
-                word += intent['slots'][slot_names[i]]['value']
+                word += user_input
             else:
                 speech_output = "Sorry, I didn't get that. " \
                                 "Please say anagram and then spell out a 2-10 letter word for me."
@@ -71917,6 +71917,9 @@ def get_anagram(intent, session):
                     'error: '+user_input, speech_output, reprompt_text, should_end_session))
     perms = set([''.join(i) for i in list(itertools.permutations(word))])
     real_words = perms.intersection(word_set)
+    if word in real_words:
+        # don't return the same word the user spelled out
+        real_words.discard(word)
     if len(real_words) > 1:
         speech_output = "Success! I've found {} anagrams: {}".format(len(real_words), ', '.join(real_words))
     elif len(real_words) == 1:
