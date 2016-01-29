@@ -8,6 +8,7 @@ Anagram Alexa Skill -- try to find anagrams for provided letters
 
 from __future__ import print_function
 import string
+import itertools
 alphabet = string.lowercase
 
 word_set = set(['aachen',
@@ -71903,6 +71904,7 @@ def get_anagram(intent, session):
     for i in xrange(10):
         if 'value' in intent['slots'][slot_names[i]]:
             user_input = intent['slots'][slot_names[i]]['value']
+            user_input = string.lower(user_input)
             if (len(user_input) == 1) and (alphabet.find(user_input) != -1):
                 word += intent['slots'][slot_names[i]]['value']
             else:
@@ -71912,7 +71914,6 @@ def get_anagram(intent, session):
                 should_end_session = True
                 return build_response(session_attributes, build_speechlet_response(
                     'error: '+user_input, speech_output, reprompt_text, should_end_session))
-    word = string.lower(word)
     perms = [''.join(i) for i in list(itertools.permutations(word))]
     real_words = perms.intersection(word_set)
     if len(real_words) != 0:
